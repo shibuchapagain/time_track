@@ -1,0 +1,277 @@
+**_ NODE JS CODING CHALLENGE _**
+
+--> First need to install node package with command -> npm install.
+
+--> Use .env.example for env to remove .example part.
+
+--> I have an database password "rootroot", if there is no any password then use " " only on DB_PASSWORD.
+
+--> I have use sequelize (mysql ORM) for database, need to install with command: npx sequelize-cli db:migrate.
+
+--> After complete migration, check on database (localhost/phpmyadmin), there will be create "newspaper" database, if there is no any newspaper database, do create newspaper database on phpmyadmin, and run this: npx sequelize-cli db:migrate.
+
+--> START PROJECT by this command: "yarn start",
+
+--> I have automatic create fake data on database, first this code will be run, and insert fake data on database.
+
+--> FOR API
+--> Use this api endpoint: http://localhost:5000/api/v1/news/getNewsArticle/politics-article?pageSize=2&currentPage=2,
+In here Our api endpoint is: http://localhost:5000/api/v1/news/
+Route is: getNewsArticle, and params is: politics-article,
+
+--> Data will filter through this section keyword:
+
+**_ TOOLS _**
+
+1. Use bunyan for logger(For each request like info and error).
+   --> Store info logger on different file, and error logger on different file.
+2. Use sequelize(ORM) (MYSQL) database.
+3. Use node-cache for Caching.
+4. Use compression for Reduce the size of data sent.
+5. Use express.
+6. Use http for server.
+7. Api response on both json and xml format. (by default response will be on json format, if we need xml format. send "accept: application/xml" on request header.)
+
+THANK YOU.
+
+**_ API RESPONSE _**
+
+1. RESPONSE ON JSON FORMAT:
+   URL: http://localhost:5000/api/v1/news/getNewsArticle/politics-article?pageSize=3&currentPage=1
+
+{
+"response": {
+"status": "ok",
+"total": 3,
+"startIndex": 1,
+"pageSize": 3,
+"currentPage": 1,
+"pages": 1,
+"results": [
+{
+"id": 118,
+"type": "politics-article",
+"sectionId": "us-news",
+"sectionName": "US news",
+"webPublicationDate": "2023-08-24T11:00:38Z",
+"webTitle": "Republican hopefuls shrug when asked about climate crisis during debate",
+"webUrl": "https://www.theguardian.com/us-news/2023/aug/24/republican-hopefuls-shrug-when-asked-about-climate-crisis-during-debate",
+"apiUrl": "https://content.guardianapis.com/us-news/2023/aug/24/republican-hopefuls-shrug-when-asked-about-climate-crisis-during-debate",
+"isHosted": false,
+"pillarId": "pillar/news",
+"pillarName": "News",
+"createdAt": "2023-11-07T14:11:02.000Z",
+"updatedAt": "2023-11-07T14:11:02.000Z"
+},
+{
+"id": 117,
+"type": "politics-article",
+"sectionId": "us-news",
+"sectionName": "US news",
+"webPublicationDate": "2023-08-24T09:00:04Z",
+"webTitle": "A Republican debate that offered no alternative to Trump",
+"webUrl": "https://www.theguardian.com/us-news/2023/aug/24/a-republican-debate-that-offered-no-alternative-to-trump",
+"apiUrl": "https://content.guardianapis.com/us-news/2023/aug/24/a-republican-debate-that-offered-no-alternative-to-trump",
+"isHosted": false,
+"pillarId": "pillar/news",
+"pillarName": "News",
+"createdAt": "2023-11-07T14:11:02.000Z",
+"updatedAt": "2023-11-07T14:11:02.000Z"
+},
+{
+"id": 116,
+"type": "politics-article",
+"sectionId": "us-news",
+"sectionName": "US news",
+"webPublicationDate": "2023-09-28T04:28:28Z",
+"webTitle": "Fact-check: six Republican debate claims from crime to immigration",
+"webUrl": "https://www.theguardian.com/us-news/2023/sep/28/republican-debate-fact-check-crime-immigration",
+"apiUrl": "https://content.guardianapis.com/us-news/2023/sep/28/republican-debate-fact-check-crime-immigration",
+"isHosted": false,
+"pillarId": "pillar/news",
+"pillarName": "News",
+"createdAt": "2023-11-07T14:11:02.000Z",
+"updatedAt": "2023-11-07T14:11:02.000Z"
+}
+]
+}
+}
+
+2. API RESPONSE ON XML FORMAT:
+
+URL: URL: http://localhost:5000/api/v1/news/getNewsArticle/politics-article?pageSize=3&currentPage=1
+
+{"response":"
+
+<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n
+
+<root>\n  
+ <status>ok</status>\n
+<total>3</total>\n
+<startIndex>1</startIndex>\n
+<pageSize>3</pageSize>\n
+<currentPage>1</currentPage>\n
+<pages>1</pages>\n
+<results>\n  
+ <dataValues>\n  
+ <id>118</id>\n
+<type>politics-article</type>\n
+<sectionId>us-news</sectionId>\n
+<sectionName>US news</sectionName>\n
+<webPublicationDate>2023-08-24T11:00:38Z</webPublicationDate>\n
+<webTitle>Republican hopefuls shrug when asked about climate crisis during debate</webTitle>\n
+<webUrl>https://www.theguardian.com/us-news/2023/aug/24/republican-hopefuls-shrug-when-asked-about-climate-crisis-during-debate</webUrl>\n
+<apiUrl>https://content.guardianapis.com/us-news/2023/aug/24/republican-hopefuls-shrug-when-asked-about-climate-crisis-during-debate</apiUrl>\n
+<isHosted>false</isHosted>\n
+<pillarId>pillar/news</pillarId>\n
+<pillarName>News</pillarName>\n
+<createdAt/>\n
+<updatedAt/>\n
+</dataValues>\n
+<\_previousDataValues>\n  
+ <id>118</id>\n
+<type>politics-article</type>\n
+<sectionId>us-news</sectionId>\n
+<sectionName>US news</sectionName>\n
+<webPublicationDate>2023-08-24T11:00:38Z</webPublicationDate>\n
+<webTitle>Republican hopefuls shrug when asked about climate crisis during debate</webTitle>\n
+<webUrl>https://www.theguardian.com/us-news/2023/aug/24/republican-hopefuls-shrug-when-asked-about-climate-crisis-during-debate</webUrl>\n
+<apiUrl>https://content.guardianapis.com/us-news/2023/aug/24/republican-hopefuls-shrug-when-asked-about-climate-crisis-during-debate</apiUrl>\n
+<isHosted>false</isHosted>\n
+<pillarId>pillar/news</pillarId>\n
+<pillarName>News</pillarName>\n
+<createdAt/>\n
+<updatedAt/>\n
+</\_previousDataValues>\n
+<uniqno>1</uniqno>\n
+<\_changed/>\n
+<\_options>\n  
+ <isNewRecord>false</isNewRecord>\n
+<\_schema/>\n
+<\_schemaDelimiter/>\n
+<raw>true</raw>\n
+<attributes>id</attributes>\n
+<attributes>type</attributes>\n
+<attributes>sectionId</attributes>\n
+<attributes>sectionName</attributes>\n
+<attributes>webPublicationDate</attributes>\n
+<attributes>webTitle</attributes>\n
+<attributes>webUrl</attributes>\n
+<attributes>apiUrl</attributes>\n
+<attributes>isHosted</attributes>\n
+<attributes>pillarId</attributes>\n
+<attributes>pillarName</attributes>\n
+<attributes>createdAt</attributes>\n
+<attributes>updatedAt</attributes>\n
+</\_options>\n
+<isNewRecord>false</isNewRecord>\n
+</results>\n
+<results>\n  
+ <dataValues>\n  
+ <id>117</id>\n
+<type>politics-article</type>\n
+<sectionId>us-news</sectionId>\n
+<sectionName>US news</sectionName>\n
+<webPublicationDate>2023-08-24T09:00:04Z</webPublicationDate>\n
+<webTitle>A Republican debate that offered no alternative to Trump</webTitle>\n
+<webUrl>https://www.theguardian.com/us-news/2023/aug/24/a-republican-debate-that-offered-no-alternative-to-trump</webUrl>\n
+<apiUrl>https://content.guardianapis.com/us-news/2023/aug/24/a-republican-debate-that-offered-no-alternative-to-trump</apiUrl>\n
+<isHosted>false</isHosted>\n
+<pillarId>pillar/news</pillarId>\n
+<pillarName>News</pillarName>\n
+<createdAt/>\n
+<updatedAt/>\n
+</dataValues>\n
+<\_previousDataValues>\n  
+ <id>117</id>\n
+<type>politics-article</type>\n
+<sectionId>us-news</sectionId>\n
+<sectionName>US news</sectionName>\n
+<webPublicationDate>2023-08-24T09:00:04Z</webPublicationDate>\n
+<webTitle>A Republican debate that offered no alternative to Trump</webTitle>\n
+<webUrl>https://www.theguardian.com/us-news/2023/aug/24/a-republican-debate-that-offered-no-alternative-to-trump</webUrl>\n
+<apiUrl>https://content.guardianapis.com/us-news/2023/aug/24/a-republican-debate-that-offered-no-alternative-to-trump</apiUrl>\n
+<isHosted>false</isHosted>\n
+<pillarId>pillar/news</pillarId>\n
+<pillarName>News</pillarName>\n
+<createdAt/>\n
+<updatedAt/>\n
+</\_previousDataValues>\n
+<uniqno>1</uniqno>\n
+<\_changed/>\n
+<\_options>\n  
+ <isNewRecord>false</isNewRecord>\n
+<\_schema/>\n
+<\_schemaDelimiter/>\n
+<raw>true</raw>\n
+<attributes>id</attributes>\n
+<attributes>type</attributes>\n
+<attributes>sectionId</attributes>\n
+<attributes>sectionName</attributes>\n
+<attributes>webPublicationDate</attributes>\n
+<attributes>webTitle</attributes>\n
+<attributes>webUrl</attributes>\n
+<attributes>apiUrl</attributes>\n
+<attributes>isHosted</attributes>\n
+<attributes>pillarId</attributes>\n
+<attributes>pillarName</attributes>\n
+<attributes>createdAt</attributes>\n
+<attributes>updatedAt</attributes>\n
+</\_options>\n
+<isNewRecord>false</isNewRecord>\n
+</results>\n
+<results>\n  
+ <dataValues>\n  
+ <id>116</id>\n
+<type>politics-article</type>\n
+<sectionId>us-news</sectionId>\n
+<sectionName>US news</sectionName>\n
+<webPublicationDate>2023-09-28T04:28:28Z</webPublicationDate>\n
+<webTitle>Fact-check: six Republican debate claims from crime to immigration</webTitle>\n
+<webUrl>https://www.theguardian.com/us-news/2023/sep/28/republican-debate-fact-check-crime-immigration</webUrl>\n
+<apiUrl>https://content.guardianapis.com/us-news/2023/sep/28/republican-debate-fact-check-crime-immigration</apiUrl>\n
+<isHosted>false</isHosted>\n
+<pillarId>pillar/news</pillarId>\n
+<pillarName>News</pillarName>\n
+<createdAt/>\n
+<updatedAt/>\n
+</dataValues>\n
+<\_previousDataValues>\n  
+ <id>116</id>\n
+<type>politics-article</type>\n
+<sectionId>us-news</sectionId>\n
+<sectionName>US news</sectionName>\n
+<webPublicationDate>2023-09-28T04:28:28Z</webPublicationDate>\n
+<webTitle>Fact-check: six Republican debate claims from crime to immigration</webTitle>\n
+<webUrl>https://www.theguardian.com/us-news/2023/sep/28/republican-debate-fact-check-crime-immigration</webUrl>\n
+<apiUrl>https://content.guardianapis.com/us-news/2023/sep/28/republican-debate-fact-check-crime-immigration</apiUrl>\n
+<isHosted>false</isHosted>\n
+<pillarId>pillar/news</pillarId>\n
+<pillarName>News</pillarName>\n
+<createdAt/>\n
+<updatedAt/>\n
+</\_previousDataValues>\n
+<uniqno>1</uniqno>\n
+<\_changed/>\n
+<\_options>\n  
+ <isNewRecord>false</isNewRecord>\n
+<\_schema/>\n
+<\_schemaDelimiter/>\n
+<raw>true</raw>\n
+<attributes>id</attributes>\n
+<attributes>type</attributes>\n
+<attributes>sectionId</attributes>\n
+<attributes>sectionName</attributes>\n
+<attributes>webPublicationDate</attributes>\n
+<attributes>webTitle</attributes>\n
+<attributes>webUrl</attributes>\n
+<attributes>apiUrl</attributes>\n
+<attributes>isHosted</attributes>\n
+<attributes>pillarId</attributes>\n
+<attributes>pillarName</attributes>\n
+<attributes>createdAt</attributes>\n
+<attributes>updatedAt</attributes>\n
+</\_options>\n
+<isNewRecord>false</isNewRecord>\n
+</results>\n
+</root>"}

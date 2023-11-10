@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "outDir": "dist",
+    "rootDir": "./src",
+    "strict": false,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "noImplicitAny": false,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react"
+  },
+  "type": "module",
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/log/index.ts",
+    "src/model/NewsPaper.ts"
+  ],
+  "exclude": ["node_modules", "**/*.spec.ts"]
+}
